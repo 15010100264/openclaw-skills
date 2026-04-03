@@ -1,0 +1,39 @@
+{
+  "name": "openclaw-xiaohongshu-helper",
+  "version": "1.0.0",
+  "description": "AI智能生成小红书文案，支持多种风格：种草、测评、教程、日常",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.test.js",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "openclaw",
+    "xiaohongshu",
+    "content-generation",
+    "ai",
+    "social-media"
+  ],
+  "author": "OpenClaw Skills Team",
+  "license": "MIT",
+  "dependencies": {
+    "@openclaw/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.10"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "openclaw": ">=1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openclaw-skills/xiaohongshu-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openclaw-skills/xiaohongshu-helper/issues"
+  },
+  "homepage": "https://skills.openclaw.cn/xiaohongshu-helper"
+}
