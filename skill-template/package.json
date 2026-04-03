@@ -1,0 +1,37 @@
+{
+  "name": "openclaw-skill-template",
+  "version": "1.0.0",
+  "description": "OpenClaw技能模板",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.test.js",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "openclaw",
+    "skill",
+    "template"
+  ],
+  "author": "OpenClaw Skills Team",
+  "license": "MIT",
+  "dependencies": {
+    "@openclaw/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.10"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "openclaw": ">=1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openclaw-skills/skill-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openclaw-skills/skill-template/issues"
+  },
+  "homepage": "https://skills.openclaw.cn/skill-template"
+}

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw技能中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 4rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        main {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: -50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .skill-card {
+            border: 1px solid #e1e1e1;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+        
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .skill-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .install-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .install-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .install-code {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .quick-start {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+        }
+        
+        .quick-start h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>OpenClaw技能中心</span>
+            </div>
+            <div class="tagline">
+                发现、安装、使用高质量的OpenClaw技能
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="skill-count">3</span>
+                    <span class="stat-label">可用技能</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="download-count">128</span>
+                    <span class="stat-label">安装次数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="developer-count">5</span>
+                    <span class="stat-label">开发者</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section class="quick-start">
+                <h2>🚀 快速开始</h2>
+                <p>只需一行命令，即可安装和使用技能：</p>
+                <div class="code-block">
+                    openclaw skill install https://github.com/openclaw-skills/xiaohongshu-helper
+                </div>
+                <p>或者通过技能名称安装（需要配置技能中心）：</p>
+                <div class="code-block">
+                    openclaw skill install xiaohongshu-helper
+                </div>
+            </section>
+            
+            <h2 class="section-title">🌟 精选技能</h2>
+            
+            <div class="skills-grid">
+                <!-- 小红书助手 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">📱</div>
+                        <div class="skill-title">小红书助手</div>
+                    </div>
+                    <div class="skill-description">
+                        AI智能生成小红书文案，支持多种风格：种草、测评、教程、日常。一键生成高质量内容。
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">AI生成</span>
+                        <span class="tag">内容创作</span>
+                        <span class="tag">社交媒体</span>
+                        <span class="tag">免费</span>
+                    </div>
+                    <button class="install-btn" onclick="installSkill('xiaohongshu-helper')">
+                        安装技能
+                    </button>
+                    <div class="install-code" id="code-xiaohongshu-helper" style="display: none;">
+                        openclaw skill install https://github.com/openclaw-skills/xiaohongshu-helper
+                    </div>
+                </div>
+                
+                <!-- Seedance视频生成 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🎬</div>
+                        <div class="skill-title">Seedance视频生成</div>
+                    </div>
+                    <div class="skill-description">
+                        专业视频提示词生成，28+导演风格，电影级镜头设计。为Seedance 2.0生成高质量视频提示。
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">视频生成</span>
+                        <span class="tag">AI视频</span>
+                        <span class="tag">专业级</span>
+                        <span class="tag">付费</span>
+                    </div>
+                    <button class="install-btn" onclick="installSkill('seedance-shot-design')">
+                        安装技能
+                    </button>
+                    <div class="install-code" id="code-seedance-shot-design" style="display: none;">
+                        openclaw skill install https://github.com/openclaw-skills/seedance-shot-design
+                    </div>
+                </div>
+                
+                <!-- 自我进化技能 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🧠</div>
+                        <div class="skill-title">自我进化技能</div>
+                    </div>
+                    <div class="skill-description">
+                        AI自我学习系统，多记忆架构，持续学习优化。让AI助手从经验中学习并不断改进。
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">AI学习</span>
+                        <span class="tag">自我进化</span>
+                        <span class="tag">高级功能</span>
+                        <span class="tag">免费</span>
+                    </div>
+                    <button class="install-btn" onclick="installSkill('self-improving-agent')">
+                        安装技能
+                    </button>
+                    <div class="install-code" id="code-self-improving-agent" style="display: none;">
+                        openclaw skill install https://github.com/openclaw-skills/self-improving-agent
+                    </div>
+                </div>
+                
+                <!-- 知识库管理 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">📚</div>
+                        <div class="skill-title">知识库管理</div>
+                    </div>
+                    <div class="skill-description">
+                        本地知识库管理系统，支持Markdown文档管理、搜索、备份和同步。整理你的学习成果。
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">知识管理</span>
+                        <span class="tag">文档</span>
+                        <span class="tag">本地存储</span>
+                        <span class="tag">开发中</span>
+                    </div>
+                    <button class="install-btn" onclick="installSkill('knowledge-base-manager')" disabled>
+                        即将推出
+                    </button>
+                </div>
+            </div>
+            
+            <section style="margin-top: 60px;">
+                <h2 class="section-title">💡 开发技能</h2>
+                <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <p style="margin-bottom: 30px; font-size: 1.1rem;">
+                        想要贡献自己的技能？我们提供了完整的开发模板和文档。
+                    </p>
+                    <div class="code-block" style="text-align: left;">
+                        # 克隆技能模板<br>
+                        git clone https://github.com/openclaw-skills/skill-template my-skill<br><br>
+                        
+                        # 开发你的技能<br>
+                        cd my-skill<br>
+                        # 编辑 SKILL.md 和 index.js<br><br>
+                        
+                        # 提交到GitHub<br>
+                        git add .<br>
+                        git commit -m "初始版本"<br>
+                        git push origin main
+                    </div>
+                    <a href="https://github.com/openclaw-skills/skill-template" class="install-btn" style="width: auto; margin-top: 20px; display: inline-block;">
+                        查看技能模板
+                    </a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="logo" style="font-size: 2rem; margin-bottom: 20px;">
+                <span class="logo-icon">⚡</span>
+                <span>OpenClaw技能中心</span>
+            </div>
+            <p style="opacity: 0.8; margin-bottom: 20px;">
+                连接开发者与用户，构建OpenClaw生态
+            </p>
+            <div class="footer-links">
+                <a href="https://github.com/openclaw-skills">GitHub</a>
+                <a href="https://docs.openclaw.ai">OpenClaw文档</a>
+                <a href="https://discord.com/invite/clawd">Discord社区</a>
+                <a href="mailto:contact@openclaw-skills.cn">联系我们</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.6; font-size: 0.9rem;">
+                © 2026 OpenClaw技能中心. 所有技能默认使用MIT许可证.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function installSkill(skillName) {
+            const codeElement = document.getElementById(`code-${skillName}`);
+            if (codeElement) {
+                // 切换显示/隐藏安装代码
+                if (codeElement.style.display === 'none') {
+                    codeElement.style.display = 'block';
+                    
+                    // 复制到剪贴板
+                    const code = codeElement.textContent.trim();
+                    navigator.clipboard.writeText(code).then(() => {
+                        alert('安装命令已复制到剪贴板！\n\n' + code);
+                    });
+                } else {
+                    codeElement.style.display = 'none';
+                }
+            }
+        }
+        
+        // 简单的统计动画
+        function animateCounter(elementId, targetValue, duration = 2000) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const startValue = 0;
+            const increment = targetValue / (duration / 16); // 60fps
+            let current = startValue;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= targetValue) {
+                    current = targetValue;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        }
+        
+        // 页面加载时启动动画
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                animateCounter('skill-count', 3);
+                animateCounter('download-count', 128);
+                animateCounter('developer-count', 5);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
